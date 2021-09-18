@@ -21,6 +21,6 @@ forever start app.js
 cd /home/ec2-user/express-app/client
 npm ci
 npm run build
-npm install -g server
+npm install -g serve
 echo "Finished installing server"
 serve -s build > app.out.log 2> app.err.log < /dev/null &

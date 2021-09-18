@@ -14,3 +14,5 @@ so weird. the whole cicd works even though it says timeout during the applicatio
 npm ci is the key, and old dependencies i guess.
 the stdout logs for the deployment are not in order.
 but overall its working.
+had to put > app.out.log 2> app.err.log < /dev/null & at the end of application start
+so that deployment succeeds. everything working now.
