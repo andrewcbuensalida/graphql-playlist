@@ -17,3 +17,8 @@ npm install
 #start our node app in the background, exchanged app with script
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
 forever start app.js
+
+cd /home/ec2-user/express-app/client
+npm run build
+npm install -g server
+serve -s build

@@ -8,7 +8,7 @@ import AddBook from "./components/AddBook";
 
 // apollo client setup
 const client = new ApolloClient({
-	uri: "https://cors-anywhere.herokuapp.com/http://ec2-18-141-223-157.ap-southeast-1.compute.amazonaws.com:4000/graphql",
+	uri: "http://localhost:4000/graphql",
 });
 
 class App extends Component {
