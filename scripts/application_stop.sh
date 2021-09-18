@@ -1,4 +1,4 @@
 #!/bin/bash
 #Stopping existing node servers
-echo "Stopping any existing node server double psych"
-# pkill node
+echo "Stopping any existing node server for real this time"
+pkill node
