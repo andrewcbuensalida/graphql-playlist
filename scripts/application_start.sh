@@ -23,5 +23,5 @@ npm ci
 npm run build
 npm install -g server
 echo "Finished installing server"
-serve -s build &
+serve -s build > app.out.log 2> app.err.log < /dev/null & 
 echo "Now serving to 5000"

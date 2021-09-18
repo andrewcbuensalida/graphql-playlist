@@ -12,3 +12,5 @@ maybe try updating dependencies via npx npm-check-updates -u and npm install
 no more need for amplify because of cors expiration.
 so weird. the whole cicd works even though it says timeout during the application start phase
 npm ci is the key, and old dependencies i guess.
+the stdout logs for the deployment are not in order.
+but overall its working.
