@@ -10,3 +10,5 @@ node adds another running server everytime i deploy without pkill
 cicd goes all the way until the last step. had to manually go into ec2 and serve client
 maybe try updating dependencies via npx npm-check-updates -u and npm install
 no more need for amplify because of cors expiration.
+so weird. the whole cicd works even though it says timeout during the application start phase
+npm ci is the key, and old dependencies i guess.
