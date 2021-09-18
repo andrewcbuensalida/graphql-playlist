@@ -23,3 +23,4 @@ npm ci
 npm run build
 npm install -g server
 serve -s build
+echo "Now serving to 5000"
