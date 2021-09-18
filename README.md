@@ -2,6 +2,7 @@ From code along by the Net Ninja on youtube.
 Check out my live site at http://books.anhonestobserver.com
 Stack: graphql, mongodb atlas, react on aws amplify front end, node on ec2 backend,
 I'm for hire. email andrewcbuensalida@gmail.com
+
 trying https://www.youtube.com/watch?v=Buh3GjHPmjo for cicd from github to ec2
 cors anywhere creator is having problems. had to click a button to temporarily enable it.
 just realized node server had to have a running process for application stop to not crash
@@ -19,3 +20,9 @@ so that deployment succeeds. everything working now.
 need to make timeout at least 300 seconds because application start takes around 4 minutes
 just found out the application stop script is from the previous successful deployment
 https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-server
+
+trying https://www.youtube.com/watch?v=oykl1Ih9pMg to take out port at the end of url
+amazon linux might be like centos
+to install nginx on ec2, had to do sudo amazon-linux-extras install nginx1
+had to do sudo systemctl start nginx to start nginx
+now when i go to ip address, it works
