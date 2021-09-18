@@ -7,3 +7,5 @@ cors anywhere creator is having problems. had to click a button to temporarily e
 just realized node server had to have a running process for application stop to not crash
 and theres a delay in the deploment logs
 node adds another running server everytime i deploy without pkill
+cicd goes all the way until the last step. had to manually go into ec2 and serve client
+no more need for amplify because of cors expiration.

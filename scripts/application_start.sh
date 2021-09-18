@@ -19,11 +19,7 @@ npm install
 forever start app.js
 
 cd /home/ec2-user/express-app/client
-
 npm install
-
 npm run build
-
 npm install -g server
-
 serve -s build
