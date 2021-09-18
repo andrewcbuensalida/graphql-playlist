@@ -8,4 +8,5 @@ just realized node server had to have a running process for application stop to 
 and theres a delay in the deploment logs
 node adds another running server everytime i deploy without pkill
 cicd goes all the way until the last step. had to manually go into ec2 and serve client
+maybe try updating dependencies via npx npm-check-updates -u and npm install
 no more need for amplify because of cors expiration.
