@@ -16,4 +16,4 @@ npm install
 
 #start our node app in the background, exchanged app with script
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
-forever start script.js
+forever start app.js
