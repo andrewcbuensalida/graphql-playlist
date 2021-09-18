@@ -5,3 +5,4 @@ I'm for hire. email andrewcbuensalida@gmail.com
 trying https://www.youtube.com/watch?v=Buh3GjHPmjo for cicd from github to ec2
 cors anywhere creator is having problems. had to click a button to temporarily enable it.
 just realized node server had to have a running process for application stop to not crash
+and theres a delay in the deploment logs
