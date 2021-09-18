@@ -20,7 +20,7 @@ forever start app.js
 
 cd /home/ec2-user/express-app/client
 
-npm install
+npm ci
 
 npm run build
 
