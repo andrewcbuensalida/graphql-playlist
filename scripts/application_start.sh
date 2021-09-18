@@ -22,5 +22,6 @@ cd /home/ec2-user/express-app/client
 npm ci
 npm run build
 npm install -g server
+echo "Finished installing server"
 serve -s build
 echo "Now serving to 5000"
