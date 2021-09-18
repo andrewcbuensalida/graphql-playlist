@@ -16,3 +16,6 @@ the stdout logs for the deployment are not in order.
 but overall its working.
 had to put > app.out.log 2> app.err.log < /dev/null & at the end of application start
 so that deployment succeeds. everything working now.
+need to make timeout at least 300 seconds because application start takes around 4 minutes
+just found out the application stop script is from the previous successful deployment
+https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-server
