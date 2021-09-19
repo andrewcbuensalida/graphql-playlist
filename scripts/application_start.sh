@@ -9,15 +9,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # loads nvm bash_completion (node is in path now)
 
 #navigate into our working directory where we have all our github files
-cd /home/ec2-user/ubuntu/server
+cd /home/ubuntu/server
 
 #install node modules
 npm ci
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
-node app.js > app.out.log 2> app.err.log < /dev/null & 
-# forever start app.js
+# node app.js > app.out.log 2> app.err.log < /dev/null & 
+forever start app.js
 echo "Finished running server"
 
 #navigate into client directory
