@@ -64,3 +64,18 @@ NOW IT'S REALLY REALLY WORKING
 need to use ubuntu instance, not stupid amazon linux
 then follow brad traversy
 didnt do the firewall step though
+
+now for enabling https
+again following traversy video but certbot didnt work so looking in the comments in the git repo, trying this
+"As I was using Ubuntu 18.04, I had to follow these instructions before using sudo add-apt-repository ppa:certbot/certbot.
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+
+And then, install certbot using:
+
+sudo apt-get install certbot python-certbot-nginx"
+still certbot command not found
