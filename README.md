@@ -60,7 +60,8 @@ now trying ubuntu because couldnt get nginx to run
 just found out i cant copy paste into the terminal from vs code.
 could work around by copy paste into somewhere else like the search bar, then copy paste into ec2 shell
 https://www.youtube.com/watch?v=oykl1Ih9pMg
-NOW IT'S REALLY REALLY WORKING. well not really. forever isnt starting.
+NOW IT'S REALLY REALLY WORKING. well not really. forever isnt starting. thats because my path was wrong.
+now it's REALLY REALLY REALLY WORKING.
 need to use ubuntu instance, not stupid amazon linux
 then follow brad traversy
 didnt do the firewall step though
@@ -79,3 +80,5 @@ And then, install certbot using:
 
 sudo apt-get install certbot python-certbot-nginx"
 still certbot command not found
+the certificate manager in aws doesnt seem to do anything.
+google cloud doesnt do anything when trying to create an ssl for books. maybe because i didnt buy the domain name from them.
