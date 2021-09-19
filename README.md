@@ -7,6 +7,7 @@ trying https://www.youtube.com/watch?v=Buh3GjHPmjo for cicd from github to ec2
 cors anywhere creator is having problems. had to click a button to temporarily enable it.
 just realized node server had to have a running process for application stop to not crash
 and theres a delay in the deploment logs
+pkill kills forever and serve
 node adds another running server everytime i deploy without pkill
 deployment stops at application stop if there is pkill but no running node
 cicd goes all the way until the last step. had to manually go into ec2 and serve client
@@ -29,6 +30,10 @@ trying https://www.youtube.com/watch?v=oykl1Ih9pMg to take out port at the end o
 amazon linux might be like centos
 to install nginx on ec2, had to do sudo amazon-linux-extras install nginx1
 had to do sudo systemctl start nginx to start nginx
+if not found, check path by echo $PATH, check where nginx is by which nginx
+if it's not in the path, add nginx to path by adding export PATH="/usr/sbin/nginx:$PATH" to nano ~/.bashrc
+then load to current shell source ~/.bashrc
+https://linuxize.com/post/how-to-add-directory-to-path-in-linux/
 now when i go to ip address, nginx shows up
 in etc/nginx/conf.d/ i made a file called books.config
 i put this in it
@@ -48,3 +53,8 @@ proxy_cache_bypass $http_upgrade;
 from https://medium.com/@ramavathvinayak/deploy-a-node-js-application-on-aws-ec2-with-nginx-as-a-reverse-proxy-e8f41f1edaef
 then sudo service nginx restart
 now it really works without the port at the end of the url
+dont forget the .env or else it will just flash or crash.
+very important, the client has to point to 13.250.105.63 instead of local host
+
+now trying ubuntu
+just found out i cant copy paste into the terminal

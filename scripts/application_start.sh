@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #give permission for everything in the express-app directory
-sudo chmod -R 777 /home/ec2-user/express-app
+sudo chmod -R 777 /home/ubuntu/express-app
 
 #add npm and node to path
 export NVM_DIR="$HOME/.nvm"	
@@ -9,7 +9,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # loads nvm bash_completion (node is in path now)
 
 #navigate into our working directory where we have all our github files
-cd /home/ec2-user/express-app/server
+cd /home/ec2-user/ubuntu/server
 
 #install node modules
 npm ci
@@ -21,7 +21,7 @@ forever start app.js
 echo "Finished running server"
 
 #navigate into client directory
-cd /home/ec2-user/express-app/client
+cd /home/ubuntu/express-app/client
 npm ci
 npm run build
 # npm install -g serve
