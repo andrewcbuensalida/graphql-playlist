@@ -56,5 +56,5 @@ now it really works without the port at the end of the url
 dont forget the .env or else it will just flash or crash.
 very important, the client has to point to 13.250.105.63 instead of local host
 
-now trying ubuntu
+now trying ubuntu because couldnt get nginx to run
 just found out i cant copy paste into the terminal
