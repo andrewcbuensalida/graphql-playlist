@@ -82,3 +82,4 @@ sudo apt-get install certbot python-certbot-nginx"
 still certbot command not found
 the certificate manager in aws doesnt seem to do anything.
 google cloud doesnt do anything when trying to create an ssl for books. maybe because i didnt buy the domain name from them.
+trying to just put https in app.js but doesnt work. says POST https://54.169.202.39:4000/graphql net::ERR_SSL_PROTOCOL_ERROR
