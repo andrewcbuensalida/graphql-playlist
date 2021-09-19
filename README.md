@@ -33,12 +33,11 @@ now when i go to ip address, nginx shows up
 in etc/nginx/conf.d/ i made a file called books.config
 i put this in it
 server {
-listen 80 default_server;
-listen [::]:80 default_server;
-server_name localhost;
-root /usr/share/nginx/html;
+listen 80;
+listen [::]:80;
+server_name books.anhonestobserver.com www.books.anhonestobserver.com;
 location / {
-proxy_pass http://localhost:5000;
+proxy_pass http://localhost:5000/;
 proxy_http_version 1.1;
 proxy_set_header Upgrade $http_upgrade;
 proxy_set_header Connection 'upgrade';
