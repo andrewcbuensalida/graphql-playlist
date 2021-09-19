@@ -83,3 +83,8 @@ still certbot command not found
 the certificate manager in aws doesnt seem to do anything.
 google cloud doesnt do anything when trying to create an ssl for books. maybe because i didnt buy the domain name from them.
 trying to just put https in app.js but doesnt work. says POST https://54.169.202.39:4000/graphql net::ERR_SSL_PROTOCOL_ERROR
+app engine, firebase, hostgator come with ssl certification, not amazon.
+trying the free ssl https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
+other paid ssls cost $5 to hundreds per year.
+certificate expires 2021-12-18 but theres auto renew.
+it will be mixed content https from http so now you have to change client app to https
