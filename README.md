@@ -21,6 +21,9 @@ so that deployment succeeds. everything working now.
 need to make timeout at least 300 seconds because application start takes around 4 minutes
 just found out the application stop script is from the previous successful deployment
 https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-server
+it runs the application stop from /opt/codedeploy-agent/deployment-root/deployment-instructions
+https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-deployments.html#troubleshooting-deployments-lifecycle-event-failures
+to troubleshoot application stop troubles
 
 trying https://www.youtube.com/watch?v=oykl1Ih9pMg to take out port at the end of url
 amazon linux might be like centos
@@ -35,7 +38,7 @@ listen [::]:80 default_server;
 server_name localhost;
 root /usr/share/nginx/html;
 location / {
-proxy_pass http://127.0.0.1:5000;
+proxy_pass http://localhost:5000;
 proxy_http_version 1.1;
 proxy_set_header Upgrade $http_upgrade;
 proxy_set_header Connection 'upgrade';

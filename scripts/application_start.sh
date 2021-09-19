@@ -13,7 +13,6 @@ cd /home/ec2-user/express-app/server
 
 #install node modules
 npm ci
-npm i pm2 -g
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
