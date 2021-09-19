@@ -17,7 +17,7 @@ echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
-pm2 start app.js
+pm2 start app.js > appclient.out.log 2> appclient.err.log < /dev/null &
 echo "Finished running server"
 
 #navigate into client directory
