@@ -16,8 +16,8 @@ npm ci
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
-# node app.js > app.out.log 2> app.err.log < /dev/null & 
-forever start app.js
+node app.js > app.out.log 2> app.err.log < /dev/null & 
+# forever start app.js
 echo "Finished running server"
 
 #navigate into client directory
