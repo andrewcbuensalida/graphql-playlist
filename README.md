@@ -26,4 +26,23 @@ trying https://www.youtube.com/watch?v=oykl1Ih9pMg to take out port at the end o
 amazon linux might be like centos
 to install nginx on ec2, had to do sudo amazon-linux-extras install nginx1
 had to do sudo systemctl start nginx to start nginx
-now when i go to ip address, it works
+now when i go to ip address, nginx shows up
+in etc/nginx/conf.d/ i made a file called books.config
+i put this in it
+server {
+listen 80 default_server;
+listen [::]:80 default_server;
+server_name localhost;
+root /usr/share/nginx/html;
+location / {
+proxy_pass http://127.0.0.1:8080;
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+proxy_set_header Host $host;
+proxy_cache_bypass $http_upgrade;
+}
+}
+from https://medium.com/@ramavathvinayak/deploy-a-node-js-application-on-aws-ec2-with-nginx-as-a-reverse-proxy-e8f41f1edaef
+then sudo service nginx restart
+now it really works without the port at the end of the url
