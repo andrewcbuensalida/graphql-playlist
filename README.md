@@ -93,3 +93,9 @@ other paid ssls cost $5 to hundreds per year.
 certificate expires 2021-12-18 but theres auto renew.
 it will be mixed content https from http so now you have to change client app to https
 protocol error
+important commands:
+sudo systemctl status nginx
+sudo nano /etc/nginx/sites-available/default
+sudo systemctl reload nginx
+sudo nginx -t
+sudo service nginx restart
