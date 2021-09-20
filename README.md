@@ -60,6 +60,9 @@ now trying ubuntu because couldnt get nginx to run
 just found out i cant copy paste into the terminal from vs code.
 could work around by copy paste into somewhere else like the search bar, then copy paste into ec2 shell
 https://www.youtube.com/watch?v=oykl1Ih9pMg
+https://gist.github.com/bradtraversy/cd90d1ed3c462fe3bddd11bf8953a896
+Check NGINX config sudo nginx -t
+Restart NGINX sudo service nginx restart or should it be systemctl reload nginx
 NOW IT'S REALLY REALLY WORKING. well not really. forever isnt starting. thats because my path was wrong.
 now it's REALLY REALLY REALLY WORKING.
 need to use ubuntu instance, not stupid amazon linux
@@ -88,3 +91,4 @@ trying the free ssl https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
 other paid ssls cost $5 to hundreds per year.
 certificate expires 2021-12-18 but theres auto renew.
 it will be mixed content https from http so now you have to change client app to https
+protocol error
