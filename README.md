@@ -62,7 +62,8 @@ could work around by copy paste into somewhere else like the search bar, then co
 https://www.youtube.com/watch?v=oykl1Ih9pMg
 https://gist.github.com/bradtraversy/cd90d1ed3c462fe3bddd11bf8953a896
 Check NGINX config sudo nginx -t
-Restart NGINX sudo service nginx restart or should it be systemctl reload nginx
+Restart NGINX sudo service nginx restart or should it be sudo systemctl reload nginx
+to check status, sudo systemctl status nginx
 NOW IT'S REALLY REALLY WORKING. well not really. forever isnt starting. thats because my path was wrong.
 now it's REALLY REALLY REALLY WORKING.
 need to use ubuntu instance, not stupid amazon linux
