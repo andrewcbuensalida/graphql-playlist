@@ -99,3 +99,22 @@ sudo nano /etc/nginx/sites-available/default
 sudo systemctl reload nginx
 sudo nginx -t
 sudo service nginx restart
+followed this https://www.digitalocean.com/community/questions/configure-nginx-for-nodejs-backend-and-react-frontend-app
+need to put this uri: "https://www.books.anhonestobserver.com/graphql",
+in apollo in client app, then in ec2 in /etc/nginx/sites-available/default, add another location
+location /graphql {
+proxy_pass http://localhost:4000/graphql;
+}
+this makes requests that are going to https://www.books.anhonestobserver.com/graphql go to the express server listening
+to 4000/graphql.
+other stuff in the default file is
+server_name books.anhonestobserver.com www.books.anhonestobserver.com;
+location / {
+proxy_pass http://localhost:5000; #whatever port your app runs on
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+proxy_set_header Host $host;
+proxy_cache_bypass $http_upgrade;
+}
+dont even need the root stuff that locates the html file, because the front end server on 5000 is serving that.
