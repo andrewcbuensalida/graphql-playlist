@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #give permission for everything in the express-app directory
-sudo chmod -R 777 /home/ubuntu/express-app
+sudo chmod -R 777 /home/ubuntu/books
 
 #add npm and node to path
 export NVM_DIR="$HOME/.nvm"	

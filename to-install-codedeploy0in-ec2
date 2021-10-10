@@ -1,12 +1,14 @@
+put this in use data during ec2 instance setup
+
 #!/bin/bash
-sudo apt-get -y update
-sudo apt-get -y install ruby
-sudo apt-get -y install wget
-cd /home/ec2-user
+sudo apt -y update
+sudo apt -y install ruby
+sudo apt -y install wget
+cd /home/ubuntu
 wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
 sudo chmod +x ./install
 sudo ./install auto
-ls
+
 
 Check if CodeDeploy agent is running:
 
