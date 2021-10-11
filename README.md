@@ -122,4 +122,12 @@ everything now really really really really working. no port at the end of the ur
 maybe put proxy option in package.json in client, so apollo wont be the long url, itll just be ':4000/graphql' or something.
 https://www.newline.co/fullstack-react/articles/using-create-react-app-with-a-server/
 
+NOW MIGRATING TO EC2 WITH DOCTORDB
+
 cant specify a port when pm2 start app.js. only if serving react build folder.
+
+just figured out the .5gb memory server is too small to npm install, so work around is to create a swap file https://hinty.io/devforth/npm-install-killed-without-a-reason-fixed/ npm install works with 1gb memory though.
+
+copy the other conf file with sudo cp <other file> /etc/nginx/sites-available/books.anhonestobserver.com.conf
+sudo nano /etc/nginx/sites-available/doctordb.anhonestobserver.com.conf
+have to do the sim link thing sudo ln -s /etc/nginx/sites-available/books.anhonestobserver.com.conf /etc/nginx/sites-enabled/

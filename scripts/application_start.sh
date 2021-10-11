@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 cd /home/ubuntu/books/server
 
 #install node modules
-npm ci --production --prefer-offline
+npm i --production --prefer-offline
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
