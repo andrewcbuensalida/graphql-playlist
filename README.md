@@ -95,7 +95,7 @@ it will be mixed content https from http so now you have to change client app to
 protocol error
 important commands:
 sudo systemctl status nginx
-sudo nano /etc/nginx/sites-available/default
+sudo nano /etc/nginx/sites-available/books.anhonestobserver.com.conf
 sudo systemctl reload nginx
 sudo nginx -t
 sudo service nginx restart
@@ -131,3 +131,25 @@ just figured out the .5gb memory server is too small to npm install, so work aro
 copy the other conf file with sudo cp <other file> /etc/nginx/sites-available/books.anhonestobserver.com.conf
 sudo nano /etc/nginx/sites-available/doctordb.anhonestobserver.com.conf
 have to do the sim link thing sudo ln -s /etc/nginx/sites-available/books.anhonestobserver.com.conf /etc/nginx/sites-enabled/
+because certbot was previously installed, it redirected books.anhonest to doctordb.anhonest. to fix, just run sudo certbot --nginx again to expand the certificates.
+
+nginx now looks like
+server {
+
+        root /home/ubuntu/books/client/build;
+
+index index.html index.htm index.nginx-debian.html;
+server_name books.anhonestobserver.com www.books.anhonestobserver.com;
+
+location / {
+try_files $uri /index.html;
+}
+
+location /graphql {
+proxy_pass http://localhost:4000/graphql;
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+proxy_set_header Host $host;
+proxy_cache_bypass $http_upgrade;
+}

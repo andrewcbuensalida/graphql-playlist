@@ -28,5 +28,5 @@ app.use(
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-	console.log(`hoy pare, now listening for requests on port ${PORT}`);
+	console.log(`Hello. Now listening for requests on port ${PORT}`);
 });
