@@ -121,3 +121,5 @@ dont even need the root stuff that locates the html file, because the front end 
 everything now really really really really working. no port at the end of the url because of nginx. forever working. https working because of certbot and nginx. cicd working.
 maybe put proxy option in package.json in client, so apollo wont be the long url, itll just be ':4000/graphql' or something.
 https://www.newline.co/fullstack-react/articles/using-create-react-app-with-a-server/
+
+cant specify a port when pm2 start app.js. only if serving react build folder.

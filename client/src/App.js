@@ -6,9 +6,13 @@ import { ApolloProvider } from "react-apollo";
 import BookList from "./components/BookList";
 import AddBook from "./components/AddBook";
 
+const uri =
+	process.env.NODE_ENV === "production"
+		? "/graphql"
+		: "http://localhost:4000/graphql";
 // apollo client setup
 const client = new ApolloClient({
-	uri: "https://www.books.anhonestobserver.com/graphql",
+	uri: uri,
 });
 
 class App extends Component {

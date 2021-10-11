@@ -12,18 +12,17 @@ export NVM_DIR="$HOME/.nvm"
 cd /home/ubuntu/express-app/server
 
 #install node modules
-npm ci
+npm ci --production --prefer-offline
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
-forever start app.js
 echo "Finished running server"
 
 #navigate into client directory
-cd /home/ubuntu/express-app/client
-npm ci
-npm run build
-# npm install -g serve
-echo "Finished installing client"
-serve -s build > app.out.log 2> app.err.log < /dev/null &
+# cd /home/ubuntu/express-app/client
+# npm ci
+# npm run build
+# # npm install -g serve
+# echo "Finished installing client"
+# serve -s build > app.out.log 2> app.err.log < /dev/null &
