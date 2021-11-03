@@ -12,6 +12,10 @@ class BookList extends Component {
 			selected: null,
 		};
 	}
+	handleDelete(e) {
+		e.stopPropagation();
+		console.log(`hello`);
+	}
 	displayBooks() {
 		var data = this.props.data;
 		if (data.loading) {
@@ -24,7 +28,13 @@ class BookList extends Component {
 						onClick={(e) => this.setState({ selected: book.id })}
 					>
 						{book.name}
-						<button>X</button>
+						<button
+							onClick={(e) => {
+								this.handleDelete(e);
+							}}
+						>
+							x
+						</button>
 					</li>
 				);
 			});

@@ -31,12 +31,17 @@ body {
 }
 
 #book-list button {
+	visibility: hidden;
 	background-color: rgb(255, 108, 108);
 	border-radius: 4px;
 	position: relative;
 	top: -10px;
 	right: -10px;
-	/* width: 10px; */
+	cursor: pointer;
+	/* display: flex; */
+}
+#book-list li:hover button {
+	visibility: visible;
 }
 
 form {
