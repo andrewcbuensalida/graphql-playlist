@@ -17,7 +17,7 @@ echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
-echo "Finished running server"
+# echo "Finished running server"
 
 #navigate into client directory
 # cd /home/ubuntu/express-app/client
