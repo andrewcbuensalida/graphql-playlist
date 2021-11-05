@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// this is used to bind graphql to react
 import { graphql } from "react-apollo";
 import { getBooksQuery } from "../queries/queries";
 
@@ -17,6 +18,7 @@ class BookList extends Component {
 		console.log(`hello`);
 	}
 	displayBooks() {
+		// this.props is there because graphql call at the bottom.
 		var data = this.props.data;
 		if (data.loading) {
 			return <div>Loading books...</div>;
