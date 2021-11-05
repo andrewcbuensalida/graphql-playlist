@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//a little different than functional react
 import { graphql } from "react-apollo";
 import * as compose from "lodash.flowright";
 
@@ -33,7 +34,8 @@ class AddBook extends Component {
 	}
 	submitForm(e) {
 		e.preventDefault();
-		// use the addBookMutation
+		// use the addBookMutation. has addBookMutation name because in the name in the compose down below
+		// variables name genre authorId go to the queries AddBook
 		this.props.addBookMutation({
 			variables: {
 				name: this.state.name,
@@ -50,19 +52,27 @@ class AddBook extends Component {
 					<label>Book name:</label>
 					<input
 						type="text"
-						onChange={(e) => this.setState({ name: e.target.value })}
+						onChange={(e) =>
+							this.setState({ name: e.target.value })
+						}
 					/>
 				</div>
 				<div className="field">
 					<label>Genre:</label>
 					<input
 						type="text"
-						onChange={(e) => this.setState({ genre: e.target.value })}
+						onChange={(e) =>
+							this.setState({ genre: e.target.value })
+						}
 					/>
 				</div>
 				<div className="field">
 					<label>Author:</label>
-					<select onChange={(e) => this.setState({ authorId: e.target.value })}>
+					<select
+						onChange={(e) =>
+							this.setState({ authorId: e.target.value })
+						}
+					>
 						<option>Select author</option>
 						{this.displayAuthors()}
 					</select>
@@ -73,6 +83,7 @@ class AddBook extends Component {
 	}
 }
 
+//when you have more than one mutation or query, use compose, which sends data to this.props.getAuthors or BookMutation
 export default compose(
 	graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
 	graphql(addBookMutation, { name: "addBookMutation" })
