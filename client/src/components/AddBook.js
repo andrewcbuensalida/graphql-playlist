@@ -36,7 +36,7 @@ class AddBook extends Component {
 		e.preventDefault();
 		// use the addBookMutation. has addBookMutation name because in the name in the compose down below
 		// variables name genre authorId go to the queries AddBook
-		let x = this.props.addBookMutation({
+		this.props.addBookMutation({
 			variables: {
 				name: this.state.name,
 				genre: this.state.genre,

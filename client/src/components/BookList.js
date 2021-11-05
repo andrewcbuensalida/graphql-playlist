@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 // this is used to bind graphql to react
 import { graphql } from "react-apollo";
-import { getBooksQuery, deleteBookMutation } from "../queries/queries";
+import {
+	getBooksQuery,
+	deleteBookMutation,
+	getBookQuery,
+} from "../queries/queries";
 import * as compose from "lodash.flowright";
 
 // components
@@ -14,18 +18,30 @@ class BookList extends Component {
 			selected: null,
 		};
 	}
-	handleDelete(e, bookId) {
+	async handleDelete(e, bookId) {
 		e.stopPropagation();
-		console.log(`This is bookId`);
-		console.log(bookId);
 
-		// this.props.deleteBookMutation({
-		// 	variables: {
-		//      id:bookId
-		// },
-		// 	refetchQueries: [{ query: getBooksQuery }],
-		// });
+		let {
+			data: {
+				deleteBook: { id: deletedBookID },
+			},
+		} = await this.props.deleteBookMutation({
+			variables: {
+				id: bookId,
+			},
+			refetchQueries: [{ query: getBooksQuery }],
+		});
+		console.log(`This is deletedBookID`);
+		console.log(deletedBookID);
+
+		this.setState({
+			selected:
+				deletedBookID == this.state.selected
+					? null
+					: this.state.selected,
+		});
 	}
+	// componentDidMount() {}
 	displayBooks() {
 		// this.props is there because graphql call at the bottom.
 		var data = this.props.getBooksQuery;
@@ -63,5 +79,5 @@ class BookList extends Component {
 
 export default compose(
 	graphql(getBooksQuery, { name: "getBooksQuery" }),
-	graphql(deleteBookMutation, { name: "deleteBooksMutation" })
+	graphql(deleteBookMutation, { name: "deleteBookMutation" })
 )(BookList);

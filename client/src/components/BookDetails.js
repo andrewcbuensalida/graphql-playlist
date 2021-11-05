@@ -6,6 +6,8 @@ class BookDetails extends Component {
 	displayBookDetails() {
 		const { book } = this.props.data;
 		if (book) {
+			console.log(`This is book.name`);
+			console.log(this.props.data.book.author.books);
 			return (
 				<div>
 					<h2>{book.name}</h2>
@@ -24,11 +26,14 @@ class BookDetails extends Component {
 		}
 	}
 	render() {
+		console.log(`in book details render`);
+
 		return <div id="book-details">{this.displayBookDetails()}</div>;
 	}
 }
 
-//whenever prop updates, variable resets for query
+//whenever prop updates, variable resets for query. props comes from BookList passing the bookId. then sends a query to
+//the server, then returns props used in BookDetails. HOC.
 export default graphql(getBookQuery, {
 	options: (props) => {
 		return {
@@ -37,4 +42,5 @@ export default graphql(getBookQuery, {
 			},
 		};
 	},
+	// fetchPolicy: "no-cache",
 })(BookDetails);
