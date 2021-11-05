@@ -6,7 +6,7 @@ import * as compose from "lodash.flowright";
 
 // components
 import BookDetails from "./BookDetails";
-
+//could either be class component of functional component
 class BookList extends Component {
 	constructor(props) {
 		super(props);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ApolloClient from "apollo-boost";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "react-apollo";
 
 // components
@@ -11,7 +11,9 @@ const uri =
 		? "/graphql"
 		: "http://localhost:4000/graphql";
 // apollo client setup
+const cache = new InMemoryCache();
 const client = new ApolloClient({
+	cache,
 	uri: uri,
 });
 

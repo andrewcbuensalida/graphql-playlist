@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 const getAuthorsQuery = gql`
 	{
@@ -18,7 +18,8 @@ const getBooksQuery = gql`
 	}
 `;
 // $ is query variable, ! requires that it is that type and not null
-//AddBook is just for naming and is optional. the name id under the addBook is the return
+//AddBook is just for naming and is optional. the name id under the addBook is the returned
+// promise result in data
 const addBookMutation = gql`
 	mutation AddBook($name: String!, $genre: String!, $authorId: ID!) {
 		addBook(name: $name, genre: $genre, authorId: $authorId) {

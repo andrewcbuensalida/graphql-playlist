@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.4.16",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.5.3",
     "lodash.flowright": "^3.5.0",
