@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 // this is used to bind graphql to react
 import { graphql } from "react-apollo";
-import { getBooksQuery } from "../queries/queries";
+import { getBooksQuery, deleteBookMutation } from "../queries/queries";
+import * as compose from "lodash.flowright";
 
 // components
 import BookDetails from "./BookDetails";
@@ -13,13 +14,21 @@ class BookList extends Component {
 			selected: null,
 		};
 	}
-	handleDelete(e) {
+	handleDelete(e, bookId) {
 		e.stopPropagation();
-		console.log(`hello`);
+		console.log(`This is bookId`);
+		console.log(bookId);
+
+		// this.props.deleteBookMutation({
+		// 	variables: {
+		//      id:bookId
+		// },
+		// 	refetchQueries: [{ query: getBooksQuery }],
+		// });
 	}
 	displayBooks() {
 		// this.props is there because graphql call at the bottom.
-		var data = this.props.data;
+		var data = this.props.getBooksQuery;
 		if (data.loading) {
 			return <div>Loading books...</div>;
 		} else {
@@ -32,7 +41,7 @@ class BookList extends Component {
 						{book.name}
 						<button
 							onClick={(e) => {
-								this.handleDelete(e);
+								this.handleDelete(e, book.id);
 							}}
 						>
 							x
@@ -52,4 +61,7 @@ class BookList extends Component {
 	}
 }
 
-export default graphql(getBooksQuery)(BookList);
+export default compose(
+	graphql(getBooksQuery, { name: "getBooksQuery" }),
+	graphql(deleteBookMutation, { name: "deleteBooksMutation" })
+)(BookList);
