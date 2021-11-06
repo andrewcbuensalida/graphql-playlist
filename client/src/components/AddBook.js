@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //a little different than functional react
-import { graphql } from "react-apollo";
+import { graphql } from "@apollo/client";
 import * as compose from "lodash.flowright";
 
 import {
