@@ -1,14 +1,21 @@
-import React, { Component } from "react";
-import { graphql } from "react-apollo";
-import { getBookQuery } from "../queries/queries";
+import React from "react";
+import { useQuery } from "@apollo/client";
+import { GET_BOOK_QUERY } from "../queries/queries";
 
-export default class BookDetails extends Component {
-	displayBookDetails() {
-		const { book } = this.props;
-		console.log(`This is book`);
-		console.log(book);
+export default function BookDetails({ selectedBookID }) {
+	const {
+		data: getBookQueryData,
+		loading: getBookQueryLoading,
+		error: getBookQueryError,
+	} = useQuery(GET_BOOK_QUERY, {
+		variables: {
+			id: selectedBookID,
+		},
+	});
 
-		if (book) {
+	function displayBookDetails() {
+		if (getBookQueryData && getBookQueryData.book) {
+			let { book } = getBookQueryData;
 			return (
 				<div>
 					<h2>{book.name}</h2>
@@ -26,11 +33,8 @@ export default class BookDetails extends Component {
 			return <div>No book selected...</div>;
 		}
 	}
-	render() {
-		console.log(`in book details render`);
 
-		return <div id="book-details">{this.displayBookDetails()}</div>;
-	}
+	return <div id="book-details">{displayBookDetails()}</div>;
 }
 
 //whenever prop updates, variable resets for query. props comes from BookList passing the bookId. then sends a query to

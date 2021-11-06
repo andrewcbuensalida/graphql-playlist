@@ -119,8 +119,8 @@ const Mutation = new GraphQLObjectType({
 				id: { type: new GraphQLNonNull(GraphQLID) },
 			},
 			resolve(parent, args) {
-				let name = Book.findByIdAndDelete(args.id);
-				return name;
+				let id = Book.findByIdAndDelete(args.id);
+				return id;
 			},
 		},
 	},

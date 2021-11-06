@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const getAuthorsQuery = gql`
+const GET_AUTHORS_QUERY = gql`
 	{
 		authors {
 			name
@@ -9,7 +9,7 @@ const getAuthorsQuery = gql`
 	}
 `;
 
-const getBooksQuery = gql`
+const GET_BOOKS_QUERY = gql`
 	{
 		books {
 			name
@@ -20,7 +20,7 @@ const getBooksQuery = gql`
 // $ is query variable, ! requires that it is that type and not null
 //AddBook is just for naming and is optional. the name id under the addBook is the returned
 // promise result in data
-const addBookMutation = gql`
+const ADD_BOOK_MUTATION = gql`
 	mutation AddBook($name: String!, $genre: String!, $authorId: ID!) {
 		addBook(name: $name, genre: $genre, authorId: $authorId) {
 			name
@@ -29,7 +29,7 @@ const addBookMutation = gql`
 	}
 `;
 
-const getBookQuery = gql`
+const GET_BOOK_QUERY = gql`
 	query GetBook($id: ID) {
 		book(id: $id) {
 			id
@@ -48,7 +48,7 @@ const getBookQuery = gql`
 	}
 `;
 
-const deleteBookMutation = gql`
+const DELETE_BOOK_MUTATION = gql`
 	mutation DeleteBook($id: ID!) {
 		deleteBook(id: $id) {
 			id
@@ -56,9 +56,9 @@ const deleteBookMutation = gql`
 	}
 `;
 export {
-	getAuthorsQuery,
-	getBooksQuery,
-	addBookMutation,
-	getBookQuery,
-	deleteBookMutation,
+	GET_AUTHORS_QUERY,
+	GET_BOOKS_QUERY,
+	ADD_BOOK_MUTATION,
+	GET_BOOK_QUERY,
+	DELETE_BOOK_MUTATION,
 };

@@ -1,30 +1,38 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 //a little different than functional react
-import { graphql } from "@apollo/client";
-import * as compose from "lodash.flowright";
+import { useMutation, useQuery } from "@apollo/client";
 
 import {
-	getAuthorsQuery,
-	addBookMutation,
-	getBooksQuery,
+	GET_AUTHORS_QUERY,
+	ADD_BOOK_MUTATION,
+	GET_BOOKS_QUERY,
 } from "../queries/queries";
 
-class AddBook extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: "",
-			genre: "",
-			authorId: "",
-			isFormIncomplete: false,
-		};
-	}
-	displayAuthors() {
-		var data = this.props.getAuthorsQuery;
-		if (data.loading) {
+export default function AddBook() {
+	const [name, setName] = useState("");
+	const [genre, setGenre] = useState("");
+	const [authorId, setAuthorId] = useState("");
+	const [isFormIncomplete, setIsFormIncomplete] = useState(false);
+
+	const {
+		data: getAuthorsQueryData,
+		loading: getAuthorsQueryLoading,
+		error: getAuthorsQueryError,
+	} = useQuery(GET_AUTHORS_QUERY);
+	const [
+		addBookMutation,
+		{
+			data: addBookMutationData,
+			loading: addBookMutationLoading,
+			error: addBookMutationError,
+		},
+	] = useMutation(ADD_BOOK_MUTATION);
+
+	function displayAuthors() {
+		if (getAuthorsQueryLoading) {
 			return <option disabled>Loading authors</option>;
 		} else {
-			return data.authors.map((author) => {
+			return getAuthorsQueryData.authors.map((author) => {
 				return (
 					<option key={author.id} value={author.id}>
 						{author.name}
@@ -33,73 +41,57 @@ class AddBook extends Component {
 			});
 		}
 	}
-	submitForm(e) {
+	function submitForm(e) {
 		e.preventDefault();
-		if (
-			this.state.name == "" ||
-			this.state.genre == "" ||
-			this.state.authorId == ""
-		) {
-			this.setState({ isFormIncomplete: true });
+		if (name == "" || genre == "" || authorId == "") {
+			setIsFormIncomplete(true);
 			return;
 		}
-		this.setState({ isFormIncomplete: false });
+		setIsFormIncomplete(false);
 		// use the addBookMutation. has addBookMutation name because in the name in the compose down below
 		// variables name genre authorId go to the queries AddBook
-		this.props.addBookMutation({
+		addBookMutation({
 			variables: {
-				name: this.state.name,
-				genre: this.state.genre,
-				authorId: this.state.authorId,
+				name: name,
+				genre: genre,
+				authorId: authorId,
 			},
-			refetchQueries: [{ query: getBooksQuery }],
+			refetchQueries: [{ query: GET_BOOKS_QUERY }],
 		});
 	}
-	render() {
-		return (
-			<form id="add-book" onSubmit={this.submitForm.bind(this)}>
-				{this.state.isFormIncomplete && (
-					<div id="incomplete">Form is incomplete</div>
-				)}
-				<div className="field">
-					<label>Book name:</label>
-					<input
-						type="text"
-						onChange={(e) =>
-							this.setState({ name: e.target.value })
-						}
-					/>
-				</div>
-				<div className="field">
-					<label>Genre:</label>
-					<input
-						type="text"
-						onChange={(e) =>
-							this.setState({ genre: e.target.value })
-						}
-					/>
-				</div>
-				<div className="field">
-					<label>Author:</label>
-					<select
-						onChange={(e) =>
-							this.setState({ authorId: e.target.value })
-						}
-					>
-						<option key="" value="">
-							Select author
-						</option>
-						{this.displayAuthors()}
-					</select>
-				</div>
-				<button>+</button>
-			</form>
-		);
-	}
+
+	return (
+		<form
+			id="add-book"
+			onSubmit={(e) => {
+				submitForm(e);
+			}}
+		>
+			{isFormIncomplete && <div id="incomplete">Form is incomplete</div>}
+			<div className="field">
+				<label>Book name:</label>
+				<input type="text" onChange={(e) => setName(e.target.value)} />
+			</div>
+			<div className="field">
+				<label>Genre:</label>
+				<input type="text" onChange={(e) => setGenre(e.target.value)} />
+			</div>
+			<div className="field">
+				<label>Author:</label>
+				<select onChange={(e) => setAuthorId(e.target.value)}>
+					<option key="" value="">
+						Select author
+					</option>
+					{displayAuthors()}
+				</select>
+			</div>
+			<button>+</button>
+		</form>
+	);
 }
 
 //when you have more than one mutation or query, use compose, which sends data to this.props.getAuthors or BookMutation
-export default compose(
-	graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
-	graphql(addBookMutation, { name: "addBookMutation" })
-)(AddBook);
+// export default compose(
+// 	graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
+// 	graphql(addBookMutation, { name: "addBookMutation" })
+// )(AddBook);
