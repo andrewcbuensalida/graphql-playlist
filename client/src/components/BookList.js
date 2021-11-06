@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-// this is used to bind graphql to react
 import { useQuery, useMutation } from "@apollo/client";
-import {
-	getBooksQuery,
-	deleteBookMutation,
-	getBookQuery,
-} from "../queries/queries";
-import * as compose from "lodash.flowright";
+import { GET_BOOKS_QUERY, DELETE_BOOK_MUTATION } from "../queries/queries";
 
-// components
 import BookDetails from "./BookDetails";
-//could either be class component of functional component
 export default function BookList() {
-	const [selectedBook, setSelectedBook] = useState(null);
+	const [selectedBookID, setSelectedBookID] = useState(null);
 	const [deleteBookMutation, { data, loading, error }] =
-		useMutation(deleteBookMutation);
-	const [getBooksQuery, { data, loading, error }] = useQuery(getBooksQuery);
-	const [getBookQuery, { data, loading, error }] = useQuery(getBookQuery);
+		useMutation(DELETE_BOOK_MUTATION);
+	const {
+		data: getBooksQueryData,
+		loading: getBooksQueryLoading,
+		error: getBooksQueryError,
+	} = useQuery(GET_BOOKS_QUERY);
 
 	async function handleDelete(e, bookId) {
 		e.stopPropagation();
@@ -29,42 +24,25 @@ export default function BookList() {
 			variables: {
 				id: bookId,
 			},
-			refetchQueries: [
-				{ query: getBooksQuery },
-				{ query: getBookQuery, fetchPolicy: "no-cache" },
-			],
-			fetchPolicy: "no-cache",
+			refetchQueries: [{ query: GET_BOOKS_QUERY }],
 		});
-		if (deletedBookID == selectedBook)
-			setSelectedBook({
-				selected:
-					deletedBookID == this.state.selected ? null : selected,
-			});
+		if (deletedBookID == selectedBookID) setSelectedBookID(null);
 	}
-	async function handleSelect(id) {
-		const selectedBook = await getBookQuery.fetchMore({
-			variables: {
-				id,
-			},
-		});
-		this.setState({ selectedBook: selectedBook.data.book });
-	}
+
 	function displayBooks() {
-		// this.props is there because graphql call at the bottom.
-		var data = getBooksQuery;
-		if (data.loading) {
+		if (getBooksQueryLoading) {
 			return <div>Loading books...</div>;
 		} else {
-			return data.books.map((book) => {
+			return getBooksQueryData.books.map((book) => {
 				return (
 					<li
 						key={book.id}
-						onClick={(e) => this.handleSelect(book.id)}
+						onClick={(e) => setSelectedBookID(book.id)}
 					>
 						{book.name}
 						<button
 							onClick={(e) => {
-								this.handleDelete(e, book.id);
+								handleDelete(e, book.id);
 							}}
 						>
 							x
@@ -75,13 +53,10 @@ export default function BookList() {
 		}
 	}
 
-	console.log(`This is this.selectedBook inside render`);
-	console.log(this.state.selectedBook);
-
 	return (
 		<div>
 			<ul id="book-list">{displayBooks()}</ul>
-			<BookDetails book={selectedBook} />
+			<BookDetails selectedBookID={selectedBookID} />
 		</div>
 	);
 }
