@@ -58,6 +58,9 @@ export default function AddBook() {
 			},
 			refetchQueries: [{ query: GET_BOOKS_QUERY }],
 		});
+		setName("");
+		setGenre("");
+		setAuthorId("");
 	}
 
 	return (
@@ -70,15 +73,26 @@ export default function AddBook() {
 			{isFormIncomplete && <div id="incomplete">Form is incomplete</div>}
 			<div className="field">
 				<label>Book name:</label>
-				<input type="text" onChange={(e) => setName(e.target.value)} />
+				<input
+					value={name}
+					type="text"
+					onChange={(e) => setName(e.target.value)}
+				/>
 			</div>
 			<div className="field">
 				<label>Genre:</label>
-				<input type="text" onChange={(e) => setGenre(e.target.value)} />
+				<input
+					value={genre}
+					type="text"
+					onChange={(e) => setGenre(e.target.value)}
+				/>
 			</div>
 			<div className="field">
 				<label>Author:</label>
-				<select onChange={(e) => setAuthorId(e.target.value)}>
+				<select
+					value={authorId}
+					onChange={(e) => setAuthorId(e.target.value)}
+				>
 					<option key="" value="">
 						Select author
 					</option>
