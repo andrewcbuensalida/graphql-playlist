@@ -15,7 +15,7 @@ class BookList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selected: null,
+			selectedBook: null,
 		};
 	}
 	async handleDelete(e, bookId) {
@@ -38,7 +38,14 @@ class BookList extends Component {
 					: this.state.selected,
 		});
 	}
-	// componentDidMount() {}
+	async handleSelect(id) {
+		const selectedBook = await this.props.getBookQuery.fetchMore({
+			variables: {
+				id: id,
+			},
+		});
+		this.setState({ selectedBook: selectedBook.data.book });
+	}
 	displayBooks() {
 		// this.props is there because graphql call at the bottom.
 		var data = this.props.getBooksQuery;
@@ -49,7 +56,7 @@ class BookList extends Component {
 				return (
 					<li
 						key={book.id}
-						onClick={(e) => this.setState({ selected: book.id })}
+						onClick={(e) => this.handleSelect(book.id)}
 					>
 						{book.name}
 						<button
@@ -65,13 +72,13 @@ class BookList extends Component {
 		}
 	}
 	render() {
-		console.log(`This is `);
-		console.log(this.props.getBookQuery);
+		console.log(`This is this.selectedBook inside render`);
+		console.log(this.state.selectedBook);
 
 		return (
 			<div>
 				<ul id="book-list">{this.displayBooks()}</ul>
-				<BookDetails book={this.props.getBookQuery} />
+				<BookDetails book={this.state.selectedBook} />
 			</div>
 		);
 	}
@@ -79,15 +86,6 @@ class BookList extends Component {
 
 export default compose(
 	graphql(getBooksQuery, { name: "getBooksQuery" }),
-	graphql(getBookQuery, {
-		options: (props) => {
-			return {
-				variables: {
-					id: props.bookId,
-				},
-			};
-		},
-		// fetchPolicy: "no-cache",
-	}),
+	graphql(getBookQuery, { name: "getBookQuery" }),
 	graphql(deleteBookMutation, { name: "deleteBookMutation" })
 )(BookList);

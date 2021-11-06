@@ -5,6 +5,9 @@ import { getBookQuery } from "../queries/queries";
 export default class BookDetails extends Component {
 	displayBookDetails() {
 		const { book } = this.props;
+		// console.log(`This is book`);
+		// console.log(book);
+
 		if (book) {
 			return (
 				<div>
