@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 // this is used to bind graphql to react
-import { graphql } from "react-apollo";
+import { useQuery, useMutation } from "@apollo/client";
 import {
 	getBooksQuery,
 	deleteBookMutation,
@@ -11,21 +11,21 @@ import * as compose from "lodash.flowright";
 // components
 import BookDetails from "./BookDetails";
 //could either be class component of functional component
-class BookList extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selectedBook: null,
-		};
-	}
-	async handleDelete(e, bookId) {
+export default function BookList() {
+	const [selectedBook, setSelectedBook] = useState(null);
+	const [deleteBookMutation, { data, loading, error }] =
+		useMutation(deleteBookMutation);
+	const [getBooksQuery, { data, loading, error }] = useQuery(getBooksQuery);
+	const [getBookQuery, { data, loading, error }] = useQuery(getBookQuery);
+
+	async function handleDelete(e, bookId) {
 		e.stopPropagation();
 
 		let {
 			data: {
 				deleteBook: { id: deletedBookID },
 			},
-		} = await this.props.deleteBookMutation({
+		} = await deleteBookMutation({
 			variables: {
 				id: bookId,
 			},
@@ -35,24 +35,23 @@ class BookList extends Component {
 			],
 			fetchPolicy: "no-cache",
 		});
-		this.setState({
-			selected:
-				deletedBookID == this.state.selected
-					? null
-					: this.state.selected,
-		});
+		if (deletedBookID == selectedBook)
+			setSelectedBook({
+				selected:
+					deletedBookID == this.state.selected ? null : selected,
+			});
 	}
-	async handleSelect(id) {
-		const selectedBook = await this.props.getBookQuery.fetchMore({
+	async function handleSelect(id) {
+		const selectedBook = await getBookQuery.fetchMore({
 			variables: {
-				id: id,
+				id,
 			},
 		});
 		this.setState({ selectedBook: selectedBook.data.book });
 	}
-	displayBooks() {
+	function displayBooks() {
 		// this.props is there because graphql call at the bottom.
-		var data = this.props.getBooksQuery;
+		var data = getBooksQuery;
 		if (data.loading) {
 			return <div>Loading books...</div>;
 		} else {
@@ -75,24 +74,14 @@ class BookList extends Component {
 			});
 		}
 	}
-	render() {
-		console.log(`This is this.selectedBook inside render`);
-		console.log(this.state.selectedBook);
 
-		return (
-			<div>
-				<ul id="book-list">{this.displayBooks()}</ul>
-				<BookDetails book={this.state.selectedBook} />
-			</div>
-		);
-	}
+	console.log(`This is this.selectedBook inside render`);
+	console.log(this.state.selectedBook);
+
+	return (
+		<div>
+			<ul id="book-list">{displayBooks()}</ul>
+			<BookDetails book={selectedBook} />
+		</div>
+	);
 }
-
-export default compose(
-	graphql(getBooksQuery, { name: "getBooksQuery", fetchPolicy: "no-cache" }),
-	graphql(getBookQuery, { name: "getBookQuery", fetchPolicy: "no-cache" }),
-	graphql(deleteBookMutation, {
-		name: "deleteBookMutation",
-		fetchPolicy: "no-cache",
-	})
-)(BookList);
