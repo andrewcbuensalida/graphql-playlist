@@ -29,11 +29,8 @@ class BookList extends Component {
 			variables: {
 				id: bookId,
 			},
-			refetchQueries: [{ query: getBooksQuery }],
+			refetchQueries: [{ query: getBooksQuery }, { query: getBookQuery }],
 		});
-		console.log(`This is deletedBookID`);
-		console.log(deletedBookID);
-
 		this.setState({
 			selected:
 				deletedBookID == this.state.selected
@@ -68,10 +65,13 @@ class BookList extends Component {
 		}
 	}
 	render() {
+		console.log(`This is `);
+		console.log(this.props.getBookQuery);
+
 		return (
 			<div>
 				<ul id="book-list">{this.displayBooks()}</ul>
-				<BookDetails bookId={this.state.selected} />
+				<BookDetails book={this.props.getBookQuery} />
 			</div>
 		);
 	}
@@ -79,5 +79,15 @@ class BookList extends Component {
 
 export default compose(
 	graphql(getBooksQuery, { name: "getBooksQuery" }),
+	graphql(getBookQuery, {
+		options: (props) => {
+			return {
+				variables: {
+					id: props.bookId,
+				},
+			};
+		},
+		// fetchPolicy: "no-cache",
+	}),
 	graphql(deleteBookMutation, { name: "deleteBookMutation" })
 )(BookList);

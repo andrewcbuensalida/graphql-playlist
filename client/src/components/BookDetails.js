@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { getBookQuery } from "../queries/queries";
 
-class BookDetails extends Component {
+export default class BookDetails extends Component {
 	displayBookDetails() {
-		const { book } = this.props.data;
+		const { book } = this.props;
 		if (book) {
-			console.log(`This is book.name`);
-			console.log(this.props.data.book.author.books);
 			return (
 				<div>
 					<h2>{book.name}</h2>
@@ -34,13 +32,13 @@ class BookDetails extends Component {
 
 //whenever prop updates, variable resets for query. props comes from BookList passing the bookId. then sends a query to
 //the server, then returns props used in BookDetails. HOC.
-export default graphql(getBookQuery, {
-	options: (props) => {
-		return {
-			variables: {
-				id: props.bookId,
-			},
-		};
-	},
-	// fetchPolicy: "no-cache",
-})(BookDetails);
+// export default graphql(getBookQuery, {
+// 	options: (props) => {
+// 		return {
+// 			variables: {
+// 				id: props.bookId,
+// 			},
+// 		};
+// 	},
+// 	// fetchPolicy: "no-cache",
+// })(BookDetails);
