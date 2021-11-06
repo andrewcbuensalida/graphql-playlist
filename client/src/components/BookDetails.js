@@ -11,11 +11,15 @@ export default function BookDetails({ selectedBookID }) {
 		variables: {
 			id: selectedBookID,
 		},
+		// fetchPolicy: "no-cache",
 	});
 
 	function displayBookDetails() {
 		if (getBookQueryData && getBookQueryData.book) {
 			let { book } = getBookQueryData;
+			console.log(`This is book.author.books`);
+			console.log(book.author.books);
+
 			return (
 				<div>
 					<h2>{book.name}</h2>

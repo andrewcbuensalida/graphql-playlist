@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_BOOKS_QUERY, DELETE_BOOK_MUTATION } from "../queries/queries";
+import {
+	GET_BOOKS_QUERY,
+	DELETE_BOOK_MUTATION,
+	GET_BOOK_QUERY,
+} from "../queries/queries";
 
 import BookDetails from "./BookDetails";
 export default function BookList() {
@@ -24,7 +28,16 @@ export default function BookList() {
 			variables: {
 				id: bookId,
 			},
-			refetchQueries: [{ query: GET_BOOKS_QUERY }],
+			refetchQueries: [
+				{ query: GET_BOOKS_QUERY },
+				{
+					query: GET_BOOK_QUERY,
+					variables: {
+						id: selectedBookID,
+					},
+				},
+			],
+			// fetchPolicy: "no-cache",
 		});
 		if (deletedBookID == selectedBookID) setSelectedBookID(null);
 	}
