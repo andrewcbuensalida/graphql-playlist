@@ -29,7 +29,11 @@ class BookList extends Component {
 			variables: {
 				id: bookId,
 			},
-			refetchQueries: [{ query: getBooksQuery }, { query: getBookQuery }],
+			refetchQueries: [
+				{ query: getBooksQuery },
+				{ query: getBookQuery, fetchPolicy: "no-cache" },
+			],
+			fetchPolicy: "no-cache",
 		});
 		this.setState({
 			selected:
@@ -85,7 +89,10 @@ class BookList extends Component {
 }
 
 export default compose(
-	graphql(getBooksQuery, { name: "getBooksQuery" }),
-	graphql(getBookQuery, { name: "getBookQuery" }),
-	graphql(deleteBookMutation, { name: "deleteBookMutation" })
+	graphql(getBooksQuery, { name: "getBooksQuery", fetchPolicy: "no-cache" }),
+	graphql(getBookQuery, { name: "getBookQuery", fetchPolicy: "no-cache" }),
+	graphql(deleteBookMutation, {
+		name: "deleteBookMutation",
+		fetchPolicy: "no-cache",
+	})
 )(BookList);

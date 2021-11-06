@@ -16,6 +16,7 @@ class AddBook extends Component {
 			name: "",
 			genre: "",
 			authorId: "",
+			isFormIncomplete: false,
 		};
 	}
 	displayAuthors() {
@@ -34,6 +35,15 @@ class AddBook extends Component {
 	}
 	submitForm(e) {
 		e.preventDefault();
+		if (
+			this.state.name == "" ||
+			this.state.genre == "" ||
+			this.state.authorId == ""
+		) {
+			this.setState({ isFormIncomplete: true });
+			return;
+		}
+		this.setState({ isFormIncomplete: false });
 		// use the addBookMutation. has addBookMutation name because in the name in the compose down below
 		// variables name genre authorId go to the queries AddBook
 		this.props.addBookMutation({
@@ -48,6 +58,9 @@ class AddBook extends Component {
 	render() {
 		return (
 			<form id="add-book" onSubmit={this.submitForm.bind(this)}>
+				{this.state.isFormIncomplete && (
+					<div id="incomplete">Form is incomplete</div>
+				)}
 				<div className="field">
 					<label>Book name:</label>
 					<input
@@ -73,7 +86,9 @@ class AddBook extends Component {
 							this.setState({ authorId: e.target.value })
 						}
 					>
-						<option>Select author</option>
+						<option key="" value="">
+							Select author
+						</option>
 						{this.displayAuthors()}
 					</select>
 				</div>
