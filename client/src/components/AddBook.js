@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-//a little different than functional react
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 import {
 	GET_AUTHORS_QUERY,
 	ADD_BOOK_MUTATION,
 	GET_BOOKS_QUERY,
+	GET_BOOK_QUERY,
 } from "../queries/queries";
+
+import { SelectedBookContext } from "./SelectedBookContext";
 
 export default function AddBook() {
 	const [name, setName] = useState("");
 	const [genre, setGenre] = useState("");
 	const [authorId, setAuthorId] = useState("");
 	const [isFormIncomplete, setIsFormIncomplete] = useState(false);
+
+	const { selectedBookID } = useContext(SelectedBookContext);
 
 	const {
 		data: getAuthorsQueryData,
@@ -56,7 +60,15 @@ export default function AddBook() {
 				genre: genre,
 				authorId: authorId,
 			},
-			refetchQueries: [{ query: GET_BOOKS_QUERY }],
+			refetchQueries: [
+				{ query: GET_BOOKS_QUERY },
+				{
+					query: GET_BOOK_QUERY,
+					variables: {
+						id: selectedBookID,
+					},
+				},
+			],
 		});
 		setName("");
 		setGenre("");

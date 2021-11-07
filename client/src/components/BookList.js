@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
 	GET_BOOKS_QUERY,
@@ -7,8 +7,11 @@ import {
 } from "../queries/queries";
 
 import BookDetails from "./BookDetails";
+import { SelectedBookContext } from "./SelectedBookContext";
+
 export default function BookList() {
-	const [selectedBookID, setSelectedBookID] = useState(null);
+	const { selectedBookID, setSelectedBookID } =
+		useContext(SelectedBookContext);
 	const [deleteBookMutation, { data, loading, error }] =
 		useMutation(DELETE_BOOK_MUTATION);
 	const {
