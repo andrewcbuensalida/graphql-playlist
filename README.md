@@ -129,14 +129,15 @@ cant specify a port when pm2 start app.js. only if serving react build folder.
 just figured out the .5gb memory server is too small to npm install, so work around is to create a swap file https://hinty.io/devforth/npm-install-killed-without-a-reason-fixed/ npm install works with 1gb memory though.
 
 copy the other conf file with sudo cp <other file> /etc/nginx/sites-available/books.anhonestobserver.com.conf
-sudo nano /etc/nginx/sites-available/doctordb.anhonestobserver.com.conf
+sudo nano /etc/nginx/sites-available/books.anhonestobserver.com.conf
 have to do the sim link thing sudo ln -s /etc/nginx/sites-available/books.anhonestobserver.com.conf /etc/nginx/sites-enabled/
+sudo systemctl reload nginx to make sure it's working
 because certbot was previously installed, it redirected books.anhonest to doctordb.anhonest. to fix, just run sudo certbot --nginx again to expand the certificates. dont be alarmed if the pem name is still doctordb. it still works.
 
 nginx now looks like
 server {
-
-        root /home/ubuntu/books/client/build;
+listen 80;
+root /home/ubuntu/books/client/build;
 
         index index.html index.htm index.nginx-debian.html;
         server_name books.anhonestobserver.com www.books.anhonestobserver.com;
@@ -146,15 +147,28 @@ server {
         }
 
         location /graphql {
-        proxy_pass http://localhost:4000/graphql;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+                proxy_pass http://localhost:4000/graphql;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+        }
 
 }
 
 sudo systemctl reload nginx
 
 i guess the workflow is npm run build locally, then push to gh. it should automatically deploy.
+
+pm2 stuff:
+ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
+
+to run server, with auto restart when files change, put --watch,
+pm2 start server.js --watch --name heat
+
+then to auto restart when instance reboots,
+pm2 startup
+pm2 save
+
+to check logs , pm2 logs heat --timestamp

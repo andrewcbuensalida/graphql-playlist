@@ -12,6 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 cd /home/ubuntu/books/server
 
 #install node modules
+# initially do sudo npm ci, then after, do this
 npm i --production --prefer-offline
 echo "Finished installing server"
 

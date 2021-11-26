@@ -14,7 +14,7 @@ mongoose.connect(
 	`mongodb+srv://andrewcbuensalida:${process.env.DB_PASSWORD}@graphql-net-ninja-books.iirvr.mongodb.net/graphql-net-ninja-books-db?retryWrites=true&w=majority`
 );
 mongoose.connection.once("open", () => {
-	console.log("connected to the database i hope");
+	console.log("connected to the database i hope so");
 });
 
 // bind express with graphql
