@@ -20,7 +20,7 @@ function App() {
 		<ApolloProvider client={client}>
 			<SelectedBookContextProvider>
 				<div id="main">
-					<h1>Love's Books</h1>
+					<h1>Love's Book List</h1>
 					<BookList />
 					<AddBook />
 				</div>

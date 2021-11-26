@@ -16,11 +16,11 @@ cd /home/ubuntu/books/server
 npm i --production --prefer-offline
 echo "Finished installing server"
 
-#start our node app in the background, exchanged app with script
+#start our node app in the background, exchanged app with script. dont need this because running pm2.
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
 # echo "Finished running server"
 
-#navigate into client directory
+#navigate into client directory. dont need to do this because build already contains node_modules
 # cd /home/ubuntu/express-app/client
 # npm ci
 # npm run build
