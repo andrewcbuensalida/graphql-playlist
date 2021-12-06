@@ -11,20 +11,21 @@ import {
 import { SelectedBookContext } from "./SelectedBookContext";
 
 export default function AddBook() {
-	const [name, setName] = useState("");
+	const [name, setName] = useState(""); // name of the book
 	const [genre, setGenre] = useState("");
 	const [authorId, setAuthorId] = useState("");
 	const [isFormIncomplete, setIsFormIncomplete] = useState(false);
 
-	const { selectedBookID } = useContext(SelectedBookContext);
+	const { selectedBookID } = useContext(SelectedBookContext); // this is so it updates the books of the author of the selected book
 
 	const {
-		data: getAuthorsQueryData,
-		loading: getAuthorsQueryLoading,
+		data: getAuthorsQueryData, // renaming the data property, which was received from the server, to getAuthorsQueryData
+		loading: getAuthorsQueryLoading, // boolean to see if it's loading or not
 		error: getAuthorsQueryError,
-	} = useQuery(GET_AUTHORS_QUERY);
+	} = useQuery(GET_AUTHORS_QUERY); // GET_AUTHORS_QUERY is imported from queries.js
+
 	const [
-		addBookMutation,
+		addBookMutation, // getting the function to add a book from ADD_BOOK_MUTATION from queries.js
 		{
 			data: addBookMutationData,
 			loading: addBookMutationLoading,
@@ -32,6 +33,7 @@ export default function AddBook() {
 		},
 	] = useMutation(ADD_BOOK_MUTATION);
 
+	//load others into the drop down select box
 	function displayAuthors() {
 		if (getAuthorsQueryLoading) {
 			return <option disabled>Loading authors</option>;
@@ -60,6 +62,7 @@ export default function AddBook() {
 				genre: genre,
 				authorId: authorId,
 			},
+			// after adding a new book, refetch queries
 			refetchQueries: [
 				{ query: GET_BOOKS_QUERY },
 				{
@@ -77,6 +80,7 @@ export default function AddBook() {
 
 	return (
 		<form
+			// didnt really need to have id
 			id="add-book"
 			onSubmit={(e) => {
 				submitForm(e);
@@ -115,9 +119,3 @@ export default function AddBook() {
 		</form>
 	);
 }
-
-//when you have more than one mutation or query, use compose, which sends data to this.props.getAuthors or BookMutation
-// export default compose(
-// 	graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
-// 	graphql(addBookMutation, { name: "addBookMutation" })
-// )(AddBook);

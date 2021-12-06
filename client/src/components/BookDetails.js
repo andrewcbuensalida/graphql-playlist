@@ -8,17 +8,18 @@ export default function BookDetails({ selectedBookID }) {
 		loading: getBookQueryLoading,
 		error: getBookQueryError,
 	} = useQuery(GET_BOOK_QUERY, {
+		// variables to be passed to the query
 		variables: {
 			id: selectedBookID,
 		},
 		// fetchPolicy: "no-cache",
 	});
 
+	// this is the sidebar
 	function displayBookDetails() {
+		// if the book finished loading already and user actually selected a book
 		if (getBookQueryData && getBookQueryData.book) {
 			let { book } = getBookQueryData;
-			console.log(`This is book.author.books`);
-			console.log(book.author.books);
 
 			return (
 				<div>
@@ -42,7 +43,7 @@ export default function BookDetails({ selectedBookID }) {
 }
 
 //whenever prop updates, variable resets for query. props comes from BookList passing the bookId. then sends a query to
-//the server, then returns props used in BookDetails. HOC.
+//the server, then returns props used in BookDetails. HOC. this is for class based components.
 // export default graphql(getBookQuery, {
 // 	options: (props) => {
 // 		return {

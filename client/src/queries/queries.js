@@ -19,7 +19,7 @@ const GET_BOOKS_QUERY = gql`
 `;
 // $ is query variable, ! requires that it is that type and not null
 //AddBook is just for naming and is optional. the name id under the addBook is the returned
-// promise result in data
+// promise result in data. $name in AddBook will be put in $name addBook. name and id in the addBook function is the returned data.
 const ADD_BOOK_MUTATION = gql`
 	mutation AddBook($name: String!, $genre: String!, $authorId: ID!) {
 		addBook(name: $name, genre: $genre, authorId: $authorId) {

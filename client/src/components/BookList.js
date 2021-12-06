@@ -10,19 +10,24 @@ import BookDetails from "./BookDetails";
 import { SelectedBookContext } from "./SelectedBookContext";
 
 export default function BookList() {
+	// selectedBookID initially null
 	const { selectedBookID, setSelectedBookID } =
 		useContext(SelectedBookContext);
+	// getting the function from queries.js
 	const [deleteBookMutation, { data, loading, error }] =
 		useMutation(DELETE_BOOK_MUTATION);
 	const {
+		// getting all the books as data and renaming it to getBooksQueryData
 		data: getBooksQueryData,
+		// is true when it hasn't finished loading yet
 		loading: getBooksQueryLoading,
 		error: getBooksQueryError,
+		// this gets called automatically on component mount
 	} = useQuery(GET_BOOKS_QUERY);
 
 	async function handleDelete(e, bookId) {
 		e.stopPropagation();
-
+		// delete book and get deletedBookID in return
 		let {
 			data: {
 				deleteBook: { id: deletedBookID },
@@ -42,6 +47,7 @@ export default function BookList() {
 			],
 			// fetchPolicy: "no-cache",
 		});
+		// if the deleted book was the selectedBook, selectedBook becomes null and book details sidebar empties
 		if (deletedBookID == selectedBookID) setSelectedBookID(null);
 	}
 
@@ -61,7 +67,7 @@ export default function BookList() {
 								handleDelete(e, book.id);
 							}}
 						>
-							x
+							&times;
 						</button>
 					</li>
 				);
@@ -72,6 +78,7 @@ export default function BookList() {
 	return (
 		<div>
 			<ul id="book-list">{displayBooks()}</ul>
+			{/* this is the sidebar component */}
 			<BookDetails selectedBookID={selectedBookID} />
 		</div>
 	);
