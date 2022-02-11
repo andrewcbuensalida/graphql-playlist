@@ -53,6 +53,7 @@ const RootQuery = new GraphQLObjectType({
 			args: { id: { type: GraphQLID } },
 			// code to get data from db / other source.
 			resolve(parent, args) {
+				console.log(`in the root query book`);
 				return Book.findById(args.id);
 			},
 		},
@@ -72,6 +73,7 @@ const RootQuery = new GraphQLObjectType({
 		authors: {
 			type: new GraphQLList(AuthorType),
 			resolve(parent, args) {
+				console.log(`in the root query authors`);
 				return Author.find({});
 			},
 		},
@@ -105,6 +107,8 @@ const Mutation = new GraphQLObjectType({
 				authorId: { type: new GraphQLNonNull(GraphQLID) },
 			},
 			resolve(parent, args) {
+				console.log(`adding book`);
+
 				let book = new Book({
 					name: args.name,
 					genre: args.genre,
@@ -119,6 +123,8 @@ const Mutation = new GraphQLObjectType({
 				id: { type: new GraphQLNonNull(GraphQLID) },
 			},
 			resolve(parent, args) {
+				console.log(`deleting book`);
+
 				let id = Book.findByIdAndDelete(args.id);
 				return id;
 			},

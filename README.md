@@ -165,10 +165,10 @@ pm2 stuff:
 ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
 
 to run server, with auto restart when files change, put --watch,
-pm2 start server.js --watch --name heat
+pm2 start server.js --watch --time --name heat
 
 then to auto restart when instance reboots,
 pm2 startup
 pm2 save
 
-to check logs , pm2 logs heat --timestamp
+to check logs , pm2 logs heat 
